@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Md Sami Ahmad | AI/ML Engineer</title>
+<meta name="description" content="Md Sami Ahmad – AI/ML Engineer & Data Science Enthusiast. Building intelligent systems using Machine Learning, Predictive Analytics and Data Science."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root{
+  --bg:#050810;
+  --bg2:#080d18;
+  --surface:#0d1526;
+  --surface2:#111d35;
+  --border:#1a2d52;
+  --accent:#00e5ff;
+  --accent2:#7c3aed;
+  --accent3:#06ffa5;
+  --text:#e8edf8;
+  --muted:#6b7fa3;
+  --glow:0 0 40px rgba(0,229,255,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;line-height:1.6}
+
+/* CANVAS BG */
+#canvas-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.45}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(16px);background:rgba(5,8,16,.7);border-bottom:1px solid rgba(26,45,82,.5);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;letter-spacing:-.5px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;transition:color .3s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{background:linear-gradient(135deg,var(--accent2),#4f46e5);color:#fff;border:none;padding:.5rem 1.2rem;border-radius:6px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;text-decoration:none;transition:opacity .2s}
+.nav-cta:hover{opacity:.85}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
+.mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:rgba(5,8,16,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:99;padding:1.5rem 2rem;flex-direction:column;gap:1rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--muted);text-decoration:none;font-size:1rem;font-weight:500;padding:.5rem 0;border-bottom:1px solid var(--border)}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:6rem 0}
+.container{max-width:1100px;margin:0 auto;padding:0 2rem}
+.section-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.15em;color:var(--accent);text-transform:uppercase;margin-bottom:.8rem}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:1rem}
+.section-sub{color:var(--muted);max-width:500px;font-size:.95rem}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding-top:80px}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);border-radius:100px;padding:.35rem 1rem;font-family:'DM Mono',monospace;font-size:.72rem;color:var(--accent);letter-spacing:.08em;margin-bottom:1.5rem}
+.hero-badge .dot{width:6px;height:6px;background:var(--accent3);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero-name{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.05;letter-spacing:-.04em;margin-bottom:.5rem}
+.hero-name span{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 60%,var(--accent3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-role{font-family:'DM Mono',monospace;font-size:.9rem;color:var(--accent3);margin-bottom:1.2rem;min-height:1.4em}
+.hero-desc{color:var(--muted);font-size:1rem;line-height:1.75;max-width:480px;margin-bottom:2rem}
+.hero-btns{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.4rem;border-radius:8px;font-size:.875rem;font-weight:600;text-decoration:none;transition:all .25s;cursor:pointer;border:none;font-family:'Outfit',sans-serif}
+.btn-primary{background:linear-gradient(135deg,var(--accent2),#4f46e5);color:#fff;box-shadow:0 4px 20px rgba(124,58,237,.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,58,237,.45)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,229,255,.05)}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--muted);border:1px solid transparent}
+.btn-ghost:hover{color:var(--text);background:rgba(255,255,255,.08)}
+
+/* HERO VISUAL */
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.hero-orb{width:320px;height:320px;border-radius:50%;background:conic-gradient(from 0deg,var(--accent2),var(--accent),var(--accent3),var(--accent2));animation:spin 8s linear infinite;opacity:.15;filter:blur(40px);position:absolute}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-card{position:relative;background:linear-gradient(135deg,rgba(13,21,38,.9),rgba(17,29,53,.9));border:1px solid var(--border);border-radius:20px;padding:2rem;width:300px;backdrop-filter:blur(10px);box-shadow:var(--glow)}
+.hero-card-icon{width:56px;height:56px;background:linear-gradient(135deg,var(--accent2),#4f46e5);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem}
+.hero-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.4rem}
+.hero-card p{color:var(--muted);font-size:.8rem;line-height:1.6}
+.hero-stats{display:flex;gap:1.5rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.stat-item{}
+.stat-num{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--accent)}
+.stat-label{font-size:.7rem;color:var(--muted);font-family:'DM Mono',monospace}
+.floating-tags{position:absolute;right:-20px;top:20px;display:flex;flex-direction:column;gap:.5rem}
+.f-tag{background:rgba(13,21,38,.95);border:1px solid var(--border);border-radius:6px;padding:.3rem .7rem;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--accent3);white-space:nowrap;animation:float 3s ease-in-out infinite}
+.f-tag:nth-child(2){animation-delay:.5s}
+.f-tag:nth-child(3){animation-delay:1s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* ABOUT */
+#about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.about-text p{color:var(--muted);line-height:1.8;margin-bottom:1rem;font-size:.95rem}
+.interest-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.i-tag{background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.15);border-radius:6px;padding:.3rem .8rem;font-size:.78rem;color:var(--accent);font-family:'DM Mono',monospace}
+.about-side{}
+.info-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1rem}
+.info-card h4{font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;margin-bottom:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.info-row{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;font-size:.85rem}
+.info-row i{color:var(--accent);width:16px}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:2.5rem}
+.skill-cat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:border-color .3s,transform .3s}
+.skill-cat:hover{border-color:rgba(0,229,255,.3);transform:translateY(-4px)}
+.skill-cat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:1rem}
+.skill-cat h4{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:1rem}
+.skill-item{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;font-size:.82rem;color:var(--muted)}
+.skill-bar{width:100%;height:4px;background:rgba(255,255,255,.06);border-radius:4px;margin-top:.25rem;overflow:hidden}
+.skill-bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width 1.5s cubic-bezier(.4,0,.2,1)}
+
+/* PROJECTS */
+#projects{background:var(--bg2)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;margin-top:2.5rem}
+.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .3s;position:relative;display:flex;flex-direction:column}
+.proj-card:hover{border-color:rgba(0,229,255,.25);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.proj-banner{height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
+.proj-card-body{padding:1.4rem;flex:1;display:flex;flex-direction:column}
+.proj-cat{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:var(--accent3);text-transform:uppercase;margin-bottom:.5rem}
+.proj-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.6rem;line-height:1.3}
+.proj-desc{color:var(--muted);font-size:.82rem;line-height:1.65;margin-bottom:1rem;flex:1}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.p-tag{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);border-radius:4px;padding:.2rem .55rem;font-size:.68rem;color:#a78bfa;font-family:'DM Mono',monospace}
+.proj-footer{display:flex;gap:.5rem;padding:0}
+.proj-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.45rem .9rem;border-radius:6px;font-size:.75rem;font-weight:600;text-decoration:none;transition:.2s;font-family:'Outfit',sans-serif}
+.proj-btn-gh{background:rgba(255,255,255,.06);color:var(--muted);border:1px solid var(--border)}
+.proj-btn-gh:hover{color:var(--text);border-color:rgba(255,255,255,.2)}
+.feat-badge{position:absolute;top:.75rem;right:.75rem;background:linear-gradient(135deg,var(--accent2),#4f46e5);color:#fff;font-size:.6rem;font-weight:700;padding:.2rem .55rem;border-radius:20px;letter-spacing:.05em;text-transform:uppercase;font-family:'DM Mono',monospace}
+
+/* GITHUB */
+.gh-section{margin-top:2.5rem}
+.gh-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem}
+.gh-card img{width:100%;border-radius:12px;border:1px solid var(--border);display:block}
+.gh-contrib{width:100%;border-radius:12px;border:1px solid var(--border)}
+
+/* ACHIEVEMENTS */
+#achievements{background:var(--bg2)}
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:2.5rem}
+.ach-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem;text-align:center;transition:.3s}
+.ach-card:hover{border-color:var(--accent3);transform:translateY(-3px)}
+.ach-icon{font-size:1.8rem;margin-bottom.8rem}
+.ach-title{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:.4rem;margin-top:.6rem}
+.ach-desc{color:var(--muted);font-size:.78rem;line-height:1.6}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2.5rem}
+.contact-info{}
+.contact-links{display:flex;flex-direction:column;gap:.8rem;margin-top:1.5rem}
+.c-link{display:flex;align-items:center;gap.8rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;text-decoration:none;color:var(--text);gap:.8rem;transition:.3s}
+.c-link:hover{border-color:var(--accent);transform:translateX(4px)}
+.c-link-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.c-link-text{}
+.c-link-label{font-size:.7rem;color:var(--muted);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em}
+.c-link-val{font-size:.88rem;font-weight:500}
+.contact-form{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem}
+.contact-form h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:1.2rem}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:.4rem;font-family:'DM Mono',monospace}
+.form-group input,.form-group textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:.7rem 1rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;resize:vertical}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--accent)}
+.form-group textarea{min-height:100px}
+.form-submit{width:100%;background:linear-gradient(135deg,var(--accent2),#4f46e5);color:#fff;border:none;padding:.75rem;border-radius:8px;font-size:.875rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:.2s}
+.form-submit:hover{opacity:.85}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;position:relative;z-index:1}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-copy{color:var(--muted);font-size:.82rem}
+.footer-links{display:flex;gap:.8rem}
+.footer-links a{color:var(--muted);font-size:1rem;transition:.2s}
+.footer-links a:hover{color:var(--accent)}
+.back-top{position:fixed;bottom:2rem;right:2rem;background:var(--surface2);border:1px solid var(--border);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;color:var(--text);cursor:pointer;transition:.3s;z-index:50;text-decoration:none;font-size:.9rem;opacity:0;pointer-events:none}
+.back-top.show{opacity:1;pointer-events:all}
+.back-top:hover{border-color:var(--accent);color:var(--accent)}
+
+/* DIVIDER */
+.divider{width:60px;height:3px;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:4px;margin-bottom:2rem}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .hero-inner{grid-template-columns:1fr;gap:2rem}
+  .hero-visual{display:none}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .hero-btns .btn{font-size:.78rem;padding:.6rem 1rem}
+}
+
+/* TYPING */
+.cursor{display:inline-block;width:2px;height:1em;background:var(--accent3);margin-left:2px;animation:blink .7s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* PROJECT BANNERS */
+.banner-1{background:linear-gradient(135deg,#1a0533,#0d1f4a)}
+.banner-2{background:linear-gradient(135deg,#0a2d1f,#1a0d4a)}
+.banner-3{background:linear-gradient(135deg,#1a1a0a,#0a1a2d)}
+.banner-4{background:linear-gradient(135deg,#0d2d0d,#1a3a0d)}
+.banner-5{background:linear-gradient(135deg,#1a0d2d,#0d1a3a)}
+.banner-6{background:linear-gradient(135deg,#2d1a0a,#1a0d2d)}
+.banner-7{background:linear-gradient(135deg,#0a1a2d,#1a2d0a)}
+
+.banner-glow{position:absolute;inset:0;opacity:.4}
+</style>
+</head>
+<body>
+
+<canvas id="canvas-bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">MSA</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#github">GitHub</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta btn">Open to Opportunities</a>
+  <button class="hamburger" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#github">GitHub</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content" data-aos>
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Available for Internships & Opportunities
+        </div>
+        <h1 class="hero-name">Hi, I'm <span>Md Sami Ahmad</span></h1>
+        <div class="hero-role"><span id="typed"></span><span class="cursor"></span></div>
+        <p class="hero-desc">Building deployable AI systems focused on predictive analytics, NLP, intelligent automation, and scalable machine learning workflows.</p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn btn-primary"><i class="fas fa-layer-group"></i> View Projects</a>
+          <a href="Sami CV Professional.pdf" target="_blank" class="btn btn-outline"><i class="fas fa-download"></i> Resume</a>
+          <a href="https://github.com/samikhan07h" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://www.linkedin.com/in/samikhan07" target="_blank" class="btn btn-ghost"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-orb"></div>
+        <div class="hero-card">
+          <div class="hero-card-icon">🧠</div>
+          <h3>AI/ML Engineer</h3>
+          <p>Specializing in predictive analytics, NLP, and intelligent automation systems.</p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-num">14+</div>
+              <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">7+</div>
+              <div class="stat-label">ML Models</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">∞</div>
+              <div class="stat-label">Curiosity</div>
+            </div>
+          </div>
+        </div>
+        <div class="floating-tags">
+          <div class="f-tag">⚡ Python</div>
+          <div class="f-tag">🤖 Scikit-learn</div>
+          <div class="f-tag">📊 Pandas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <span class="section-tag">// about me</span>
+    <div class="divider"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2 class="section-title">Building AI for<br/>the Real World</h2>
+        <p>I am a B.Tech Computer Science student specializing in Data Science and Machine Learning. I enjoy developing AI-powered systems that solve real-world problems through predictive analytics, intelligent automation, and data-driven insights.</p>
+        <p>My work spans healthcare AI, industrial predictive maintenance, NLP-powered tools, and advanced time-series forecasting — always with a focus on practical, deployable solutions.</p>
+        <p>Currently focused on improving real-world AI deployment skills, advanced ML workflows, and scalable intelligent systems ready for production environments.</p>
+        <div class="interest-tags">
+          <span class="i-tag">Machine Learning</span>
+          <span class="i-tag">Predictive Analytics</span>
+          <span class="i-tag">Time Series</span>
+          <span class="i-tag">NLP</span>
+          <span class="i-tag">AI Decision Systems</span>
+          <span class="i-tag">Data Visualization</span>
+          <span class="i-tag">FastAPI</span>
+          <span class="i-tag">Streamlit</span>
+        </div>
+      </div>
+      <div class="about-side">
+        <div class="info-card">
+          <h4>Details</h4>
+          <div class="info-row"><i class="fas fa-graduation-cap"></i> B.Tech Computer Science</div>
+          <div class="info-row"><i class="fas fa-map-marker-alt"></i> India</div>
+          <div class="info-row"><i class="fas fa-code-branch"></i> 14+ GitHub Repositories</div>
+          <div class="info-row"><i class="fas fa-brain"></i> AI/ML Specialization</div>
+        </div>
+        <div class="info-card">
+          <h4>Currently Working On</h4>
+          <div class="info-row"><i class="fas fa-flask"></i> Advanced ML Pipelines</div>
+          <div class="info-row"><i class="fas fa-server"></i> Production AI Deployment</div>
+          <div class="info-row"><i class="fas fa-chart-line"></i> Scalable Forecasting Systems</div>
+        </div>
+        <div class="info-card">
+          <h4>Open To</h4>
+          <div class="info-row"><i class="fas fa-briefcase"></i> ML Engineer Internships</div>
+          <div class="info-row"><i class="fas fa-laptop-code"></i> Data Science Roles</div>
+          <div class="info-row"><i class="fas fa-users"></i> Open Source Collaboration</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <span class="section-tag">// technical skills</span>
+    <div class="divider"></div>
+    <h2 class="section-title">Tools & Technologies</h2>
+    <p class="section-sub">A curated set of tools I use to build, train, and deploy intelligent systems.</p>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <div class="skill-cat-icon" style="background:linear-gradient(135deg,#1e3a5f,#0d2a4a)">🐍</div>
+        <h4>Programming</h4>
+        <div class="skill-item">Python<div class="skill-bar"><div class="skill-bar-fill" data-w="92" style="width:0%"></div></div></div>
+        <div class="skill-item">SQL<div class="skill-bar"><div class="skill-bar-fill" data-w="78" style="width:0%"></div></div></div>
+        <div class="skill-item">JavaScript<div class="skill-bar"><div class="skill-bar-fill" data-w="65" style="width:0%"></div></div></div>
+        <div class="skill-item">C++<div class="skill-bar"><div class="skill-bar-fill" data-w="55" style="width:0%"></div></div></div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon" style="background:linear-gradient(135deg,#3a1f5f,#2a0d4a)">🤖</div>
+        <h4>Machine Learning</h4>
+        <div class="skill-item">Scikit-learn<div class="skill-bar"><div class="skill-bar-fill" data-w="88" style="width:0%"></div></div></div>
+        <div class="skill-item">TensorFlow<div class="skill-bar"><div class="skill-bar-fill" data-w="70" style="width:0%"></div></div></div>
+        <div class="skill-item">Feature Engineering<div class="skill-bar"><div class="skill-bar-fill" data-w="85" style="width:0%"></div></div></div>
+        <div class="skill-item">Model Evaluation<div class="skill-bar"><div class="skill-bar-fill" data-w="82" style="width:0%"></div></div></div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon" style="background:linear-gradient(135deg,#1f3a2a,#0d3a1f)">📊</div>
+        <h4>Data Science</h4>
+        <div class="skill-item">Pandas & NumPy<div class="skill-bar"><div class="skill-bar-fill" data-w="90" style="width:0%"></div></div></div>
+        <div class="skill-item">Time Series<div class="skill-bar"><div class="skill-bar-fill" data-w="80" style="width:0%"></div></div></div>
+        <div class="skill-item">Data Visualization<div class="skill-bar"><div class="skill-bar-fill" data-w="78" style="width:0%"></div></div></div>
+        <div class="skill-item">Statistical Analysis<div class="skill-bar"><div class="skill-bar-fill" data-w="75" style="width:0%"></div></div></div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon" style="background:linear-gradient(135deg,#3a2a0d,#4a1f0d)">🌐</div>
+        <h4>Web & Tools</h4>
+        <div class="skill-item">FastAPI / Streamlit<div class="skill-bar"><div class="skill-bar-fill" data-w="75" style="width:0%"></div></div></div>
+        <div class="skill-item">React / Tailwind<div class="skill-bar"><div class="skill-bar-fill" data-w="65" style="width:0%"></div></div></div>
+        <div class="skill-item">Git & GitHub<div class="skill-bar"><div class="skill-bar-fill" data-w="88" style="width:0%"></div></div></div>
+        <div class="skill-item">Jupyter / Colab<div class="skill-bar"><div class="skill-bar-fill" data-w="92" style="width:0%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <span class="section-tag">// featured work</span>
+    <div class="divider"></div>
+    <h2 class="section-title">Projects</h2>
+    <p class="section-sub">Real-world AI/ML systems built end-to-end — from data pipelines to deployable interfaces.</p>
+    <div class="projects-grid">
+
+      <!-- 1 Medical Triage AI -->
+      <div class="proj-card">
+        <div class="proj-banner banner-1">
+          <span style="position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(0,229,255,.6))">🏥</span>
+          <div class="banner-glow" style="background:radial-gradient(circle,rgba(0,229,255,.15),transparent)"></div>
+        </div>
+        <span class="feat-badge">Featured</span>
+        <div class="proj-card-body">
+          <div class="proj-cat">AI · Healthcare</div>
+          <div class="proj-title">Medical Triage AI</div>
+          <p class="proj-desc">ML-powered emergency triage system using FastAPI & Streamlit to classify patient urgency with real-time predictions and explainable insights. Assists in preliminary medical prioritization using advanced ML.</p>
+          <div class="proj-tags">
+            <span class="p-tag">Python</span>
+            <span class="p-tag">FastAPI</span>
+            <span class="p-tag">Streamlit</span>
+            <span class="p-tag">ML</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/samikhan07h/Medical-Triage-AI" target="_blank" class="proj-btn proj-btn-gh"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 SkillScope AI -->
+      <div class="proj-card">
+        <div class="proj-banner banner-2">
+          <span style="position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(6,255,165,.4))">🎯</span>
+          <div class="banner-glow" style="background:radial-gradient(circle,rgba(6,255,165,.12),transparent)"></div>
+        </div>
+        <span class="feat-badge">Featured</span>
+        <div class="proj-card-body">
+          <div class="proj-cat">AI · NLP</div>
+          <div class="proj-title">SkillScope AI Job Analyzer</div>
+          <p class="proj-desc">End-to-end job market analyzer that analyzes job trends, matches resumes to roles using NLP & TF-IDF, identifies skill gaps, and generates career alignment insights.</p>
+          <div class="proj-tags">
+            <span class="p-tag">Python</span>
+            <span class="p-tag">NLP</span>
+            <span class="p-tag">TF-IDF</span>
+            <span class="p-tag">ML</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/samikhan07h/SkillScope-AI-Job-Analyzer" target="_blank" class="proj-btn proj-btn-gh"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Customer Churn -->
+      <div class="proj-card">
+        <div class="proj-banner banner-3">
+          <span style="position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(124,58,237,.5))">📉</span>
+          <div class="banner-glow" style="background:radial-gradient(circle,rgba(124,58,237,.15),transparent)"></div>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-cat">Machine Learning</div>
+          <div class="proj-title">Customer Churn Prediction</div>
+          <p class="proj-desc">End-to-end churn prediction system using LightGBM with SHAP explainability, FastAPI backend, and interactive dashboard for real-time predictions and business intelligence.</p>
+          <div class="proj-tags">
+            <span class="p-tag">LightGBM</span>
+            <span class="p-tag">SHAP</span>
+            <span class="p-tag">FastAPI</span>
+            <span class="p-tag">Pandas</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/samikhan07h/customer-churn-prediction-ml-system" target="_blank" class="proj-btn proj-btn-gh"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Railway Predictive -->
+      <div class="proj-card">
+        <div class="proj-banner banner-4">
+          <span style="position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(34,197,94,.4))">🚆</span>
+          <div class="banner-glow" style="background:radial-gradient(circle,rgba(34,197,94,.12),transparent)"></div>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-cat">Industrial AI</div>
+          <div class="proj-title">Railway Predictive Maintenance</div>
+          <p class="proj-desc">AI-powered railway predictive maintenance system with real-time monitoring, ML-based failure prediction, role-based dashboards, and operational analytics for infrastructure safety.</p>
+          <div class="proj-tags">
+            <span class="p-tag">Python</span>
+            <span class="p-tag">JavaScript</span>
+            <span class="p-tag">ML</span>
+            <span class="p-tag">Analytics</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/samikhan07h/railway-predictive-maintenance-system" target="_blank" class="proj-btn proj-btn-gh"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 Hybrid Time Series -->
+      <div class="proj-card">
+        <div class="proj-banner banner-5">
+          <span style="position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(251,191,36,.4))">📈</span>
+          <div class="banner-glow" style="background:radial-gradient(circle,rgba(251,191,36,.1),transparent)"></div>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-cat">Research · Forecasting</div>
+          <div class="proj-title">Hybrid Time Series Research Lab</div>
+          <p class="proj-desc">Research platform integrating SARIMA, Prophet, XGBoost, and LSTM for comparative forecasting and performance evaluation. Advanced hybrid ML techniques for superior prediction accuracy.</p>
+          <div class="proj-tags">
+            <span class="p-tag">SARIMA</span>
+            <span class="p-tag">Prophet</span>
+            <span class="p-tag">LSTM</span>
+            <span class="p-tag">XGBoost</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/samikhan07h/Hybrid-Time-Series-Research-Lab" target="_blank" class="proj-btn proj-btn-gh"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 Enterprise Retail -->
+      <div class="proj-card">
+        <div class="proj-banner banner-6">
+          <span style="position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(251,146,60,.4))">🛒</span>
+          <div class="banner-glow" style="background:radial-gradient(circle,rgba(251,146,60,.1),transparent)"></div>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-cat">Data Science</div>
+          <div class="proj-title">Enterprise Retail Forecasting</div>
+          <p class="proj-desc">Production-grade ML retail forecasting platform with ensemble models, LSTM, MLflow tracking, API and Docker support. Optimizes inventory planning through advanced demand prediction.</p>
+          <div class="proj-tags">
+            <span class="p-tag">LSTM</span>
+            <span class="p-tag">MLflow</span>
+            <span class="p-tag">Docker</span>
+            <span class="p-tag">Ensemble</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/samikhan07h/Enterprise-Retail-Forecasting" target="_blank" class="proj-btn proj-btn-gh"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 Smart Expense -->
+      <div class="proj-card">
+        <div class="proj-banner banner-7">
+          <span style="position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(99,102,241,.5))">💸</span>
+          <div class="banner-glow" style="background:radial-gradient(circle,rgba(99,102,241,.12),transparent)"></div>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-cat">AI · Finance</div>
+          <div class="proj-title">Smart Expense Tracker</div>
+          <p class="proj-desc">Intelligent finance tracking application analyzing expenses and predicting future spending behavior. Provides personal finance insights through data visualization and ML prediction models.</p>
+          <div class="proj-tags">
+            <span class="p-tag">Python</span>
+            <span class="p-tag">JavaScript</span>
+            <span class="p-tag">Prediction</span>
+            <span class="p-tag">Analytics</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/samikhan07h/Smart-Expense-Tracker-with-Prediction" target="_blank" class="proj-btn proj-btn-gh"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 AB Testing -->
+      <div class="proj-card">
+        <div class="proj-banner banner-1" style="background:linear-gradient(135deg,#0d2a1a,#1a0d3a)">
+          <span style="position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(0,229,255,.4))">🔬</span>
+          <div class="banner-glow" style="background:radial-gradient(circle,rgba(0,229,255,.1),transparent)"></div>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-cat">Statistics · Research</div>
+          <div class="proj-title">A/B Testing Statistical Dashboard</div>
+          <p class="proj-desc">Production-style A/B Testing & Statistical Inference Dashboard with Frequentist, Bayesian analysis, power calculation, SRM detection, and sequential monitoring for data-driven decisions.</p>
+          <div class="proj-tags">
+            <span class="p-tag">Python</span>
+            <span class="p-tag">Bayesian</span>
+            <span class="p-tag">Statistics</span>
+            <span class="p-tag">Dashboard</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/samikhan07h/AB-Besting-Statistical-Inference-Dashboard" target="_blank" class="proj-btn proj-btn-gh"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GITHUB -->
+<section id="github">
+  <div class="container">
+    <span class="section-tag">// open source</span>
+    <div class="divider"></div>
+    <h2 class="section-title">GitHub Activity</h2>
+    <p class="section-sub">All projects are open-source and actively maintained on GitHub.</p>
+    <div class="gh-section">
+      <div class="gh-cards">
+        <div><img src="https://github-readme-stats.vercel.app/api?username=samikhan07h&show_icons=true&theme=dark&bg_color=0d1526&border_color=1a2d52&title_color=00e5ff&text_color=e8edf8&icon_color=7c3aed&hide_border=false" alt="GitHub Stats" loading="lazy"/></div>
+        <div><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=samikhan07h&layout=compact&theme=dark&bg_color=0d1526&border_color=1a2d52&title_color=00e5ff&text_color=e8edf8&hide_border=false" alt="Top Languages" loading="lazy"/></div>
+      </div>
+      <img class="gh-contrib" src="https://github-readme-streak-stats.herokuapp.com/?user=samikhan07h&theme=dark&background=0d1526&border=1a2d52&stroke=1a2d52&ring=00e5ff&fire=7c3aed&currStreakLabel=00e5ff" alt="GitHub Streak" loading="lazy"/>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="container">
+    <span class="section-tag">// milestones</span>
+    <div class="divider"></div>
+    <h2 class="section-title">Achievements</h2>
+    <div class="ach-grid">
+      <div class="ach-card">
+        <div class="ach-icon">🏥</div>
+        <div class="ach-title">Healthcare AI System</div>
+        <div class="ach-desc">Built production-ready ML triage system with explainable AI insights and real-time predictions.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">🔬</div>
+        <div class="ach-title">Research-Grade Forecasting</div>
+        <div class="ach-desc">Implemented hybrid time-series lab combining SARIMA, Prophet, XGBoost and LSTM models.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">🚆</div>
+        <div class="ach-title">Industrial AI Deployment</div>
+        <div class="ach-desc">Delivered predictive maintenance platform for critical railway infrastructure with role-based dashboards.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">📦</div>
+        <div class="ach-title">Production ML Pipelines</div>
+        <div class="ach-desc">Engineered end-to-end ML systems with MLflow tracking, Docker, and API backends.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">🌟</div>
+        <div class="ach-title">14+ Open Source Projects</div>
+        <div class="ach-desc">Actively maintained GitHub portfolio spanning ML, NLP, data science, and AI engineering.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <span class="section-tag">// get in touch</span>
+    <div class="divider"></div>
+    <h2 class="section-title">Let's Connect</h2>
+    <p class="section-sub">Open to ML engineering internships, data science roles, and open source collaboration.</p>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:1.5rem;font-size:.95rem">Whether you're looking for an AI/ML intern, have a project idea, or just want to talk about machine learning — I'd love to hear from you.</p>
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/samikhan07" target="_blank" class="c-link">
+            <div class="c-link-icon" style="background:rgba(10,102,194,.15);color:#0a66c2"><i class="fab fa-linkedin"></i></div>
+            <div class="c-link-text">
+              <div class="c-link-label">LinkedIn</div>
+              <div class="c-link-val">linkedin.com/in/samikhan07</div>
+            </div>
+          </a>
+          <a href="https://github.com/samikhan07h" target="_blank" class="c-link">
+            <div class="c-link-icon" style="background:rgba(255,255,255,.06);color:#e8edf8"><i class="fab fa-github"></i></div>
+            <div class="c-link-text">
+              <div class="c-link-label">GitHub</div>
+              <div class="c-link-val">github.com/samikhan07h</div>
+            </div>
+          </a>
+          <a href="mailto:samikhan75427@gmail.com" class="c-link">
+            <div class="c-link-icon" style="background:rgba(0,229,255,.08);color:var(--accent)"><i class="fas fa-envelope"></i></div>
+            <div class="c-link-text">
+              <div class="c-link-label">Email</div>
+              <div class="c-link-val">samikhan75427@gmail.com</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3>Send a Message</h3>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" placeholder="Your name"/>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="your@email.com"/>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell me about the opportunity or project..."></textarea>
+        </div>
+        <button class="form-submit" onclick="alert('Message noted! Connect via LinkedIn for a faster response.')">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">Designed & Developed by <strong>Md Sami Ahmad</strong> · AI/ML Engineer</span>
+    <div class="footer-links">
+      <a href="https://github.com/samikhan07h" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/samikhan07" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+</footer>
+
+<a href="#hero" class="back-top" id="backTop"><i class="fas fa-chevron-up"></i></a>
+
+<script>
+/* CANVAS PARTICLES */
+const canvas=document.getElementById('canvas-bg');
+const ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
+resize();window.addEventListener('resize',resize);
+class P{
+  constructor(){this.reset()}
+  reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.r=Math.random()*1.2+.3;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.a=Math.random()}
+  draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=`rgba(0,229,255,${this.a*.4})`;ctx.fill()}
+  update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset()}
+}
+for(let i=0;i<90;i++)particles.push(new P());
+function animate(){
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p=>{p.update();p.draw()});
+  // connections
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<100){ctx.beginPath();ctx.strokeStyle=`rgba(0,229,255,${(1-d/100)*.08})`;ctx.lineWidth=.5;ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke()}
+    }
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* TYPING EFFECT */
+const roles=['AI/ML Engineer','Data Science Enthusiast','Predictive Analytics Builder','NLP & ML Practitioner'];
+let ri=0,ci=0,deleting=false;
+const el=document.getElementById('typed');
+function type(){
+  const cur=roles[ri];
+  if(!deleting){el.textContent=cur.slice(0,ci+1);ci++;if(ci===cur.length){deleting=true;setTimeout(type,1600);return}}
+  else{el.textContent=cur.slice(0,ci-1);ci--;if(ci===0){deleting=false;ri=(ri+1)%roles.length}}
+  setTimeout(type,deleting?60:80);
+}
+type();
+
+/* SKILL BARS ANIMATION */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.skill-bar-fill').forEach(b=>{b.style.width=b.dataset.w+'%'});obs.unobserve(e.target)}})
+},{threshold:.3});
+document.querySelectorAll('.skill-cat').forEach(c=>obs.observe(c));
+
+/* BACK TO TOP */
+const bt=document.getElementById('backTop');
+window.addEventListener('scroll',()=>{bt.classList.toggle('show',scrollY>400)});
+
+/* HAMBURGER */
+const ham=document.getElementById('ham');
+const mm=document.getElementById('mobile-menu');
+ham.addEventListener('click',()=>mm.classList.toggle('open'));
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mm.classList.remove('open')));
+
+/* CARD HOVER GLOW */
+document.querySelectorAll('.proj-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=e.clientX-r.left,y=e.clientY-r.top;
+    card.style.background=`radial-gradient(circle at ${x}px ${y}px, rgba(0,229,255,.04), var(--surface) 60%)`;
+  });
+  card.addEventListener('mouseleave',()=>{card.style.background=''});
+});
+</script>
+</body>
+</html>
